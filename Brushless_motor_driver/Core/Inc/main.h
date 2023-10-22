@@ -75,8 +75,20 @@ void Error_Handler(void);
 #define DRIVER_VOLTAGE_GPIO_Port GPIOA
 #define MOTOR_TEMP_Pin GPIO_PIN_5
 #define MOTOR_TEMP_GPIO_Port GPIOC
+#define HALL1_INPUT_Pin GPIO_PIN_6
+#define HALL1_INPUT_GPIO_Port GPIOC
+#define HALL_2_INPUT_Pin GPIO_PIN_7
+#define HALL_2_INPUT_GPIO_Port GPIOC
+#define HALL_3_INPUT_Pin GPIO_PIN_8
+#define HALL_3_INPUT_GPIO_Port GPIOC
 #define CAN_SHDN_Pin GPIO_PIN_8
 #define CAN_SHDN_GPIO_Port GPIOA
+#define H1_OUTPUT_Pin GPIO_PIN_0
+#define H1_OUTPUT_GPIO_Port GPIOD
+#define H2_OUTPUT_Pin GPIO_PIN_1
+#define H2_OUTPUT_GPIO_Port GPIOD
+#define H3_OUTPUT_Pin GPIO_PIN_2
+#define H3_OUTPUT_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 
