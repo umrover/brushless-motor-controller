@@ -5,7 +5,10 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Core/Src/curr_sens.cpp \
 ../Core/Src/driver.cpp \
+../Core/Src/hall_encoder.cpp \
+../Core/Src/main_bridge.cpp \
 ../Core/Src/math_utils.cpp 
 
 C_SRCS += \
@@ -25,8 +28,11 @@ C_DEPS += \
 ./Core/Src/system_stm32g4xx.d 
 
 OBJS += \
+./Core/Src/curr_sens.o \
 ./Core/Src/driver.o \
+./Core/Src/hall_encoder.o \
 ./Core/Src/main.o \
+./Core/Src/main_bridge.o \
 ./Core/Src/math_utils.o \
 ./Core/Src/stm32g4xx_hal_msp.o \
 ./Core/Src/stm32g4xx_it.o \
@@ -35,7 +41,10 @@ OBJS += \
 ./Core/Src/system_stm32g4xx.o 
 
 CPP_DEPS += \
+./Core/Src/curr_sens.d \
 ./Core/Src/driver.d \
+./Core/Src/hall_encoder.d \
+./Core/Src/main_bridge.d \
 ./Core/Src/math_utils.d 
 
 
@@ -48,7 +57,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/driver.cyclo ./Core/Src/driver.d ./Core/Src/driver.o ./Core/Src/driver.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/math_utils.cyclo ./Core/Src/math_utils.d ./Core/Src/math_utils.o ./Core/Src/math_utils.su ./Core/Src/stm32g4xx_hal_msp.cyclo ./Core/Src/stm32g4xx_hal_msp.d ./Core/Src/stm32g4xx_hal_msp.o ./Core/Src/stm32g4xx_hal_msp.su ./Core/Src/stm32g4xx_it.cyclo ./Core/Src/stm32g4xx_it.d ./Core/Src/stm32g4xx_it.o ./Core/Src/stm32g4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32g4xx.cyclo ./Core/Src/system_stm32g4xx.d ./Core/Src/system_stm32g4xx.o ./Core/Src/system_stm32g4xx.su
+	-$(RM) ./Core/Src/curr_sens.cyclo ./Core/Src/curr_sens.d ./Core/Src/curr_sens.o ./Core/Src/curr_sens.su ./Core/Src/driver.cyclo ./Core/Src/driver.d ./Core/Src/driver.o ./Core/Src/driver.su ./Core/Src/hall_encoder.cyclo ./Core/Src/hall_encoder.d ./Core/Src/hall_encoder.o ./Core/Src/hall_encoder.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/main_bridge.cyclo ./Core/Src/main_bridge.d ./Core/Src/main_bridge.o ./Core/Src/main_bridge.su ./Core/Src/math_utils.cyclo ./Core/Src/math_utils.d ./Core/Src/math_utils.o ./Core/Src/math_utils.su ./Core/Src/stm32g4xx_hal_msp.cyclo ./Core/Src/stm32g4xx_hal_msp.d ./Core/Src/stm32g4xx_hal_msp.o ./Core/Src/stm32g4xx_hal_msp.su ./Core/Src/stm32g4xx_it.cyclo ./Core/Src/stm32g4xx_it.d ./Core/Src/stm32g4xx_it.o ./Core/Src/stm32g4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32g4xx.cyclo ./Core/Src/system_stm32g4xx.d ./Core/Src/system_stm32g4xx.o ./Core/Src/system_stm32g4xx.su
 
 .PHONY: clean-Core-2f-Src
 

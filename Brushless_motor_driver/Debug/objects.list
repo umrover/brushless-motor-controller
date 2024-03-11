@@ -1,5 +1,8 @@
+"./Core/Src/curr_sens.o"
 "./Core/Src/driver.o"
+"./Core/Src/hall_encoder.o"
 "./Core/Src/main.o"
+"./Core/Src/main_bridge.o"
 "./Core/Src/math_utils.o"
 "./Core/Src/stm32g4xx_hal_msp.o"
 "./Core/Src/stm32g4xx_it.o"
