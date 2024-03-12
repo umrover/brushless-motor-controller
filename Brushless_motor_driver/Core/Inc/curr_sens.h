@@ -18,10 +18,20 @@
 
 
 class CurrSensDriver{
+
+private:
+	double phase_currents[3];
+	static uint32_t ADCValues[3]; //PhaseA: 0; Phase B: 1; Phase C: 2;
+	static double counts_to_amps(uint32_t ADC_counts);
+
 public:
 
 	static ADC_HandleTypeDef* ADC_handle;
-	static uint32_t ADCValues[3]; //PhaseA: 0; Phase B: 1; Phase C: 2;
+	struct PhaseCurrents{
+		double iA;
+		double iB;
+		double iC;
+	};
 	enum class PhaseType{
 		A,B,C
 	};
@@ -32,7 +42,7 @@ public:
 		SHCSense
 	};
 	static double get_voltage_V(VoltageSenseType voltageInput);
-	static double get_current_Amp(PhaseType phase);
+	static void get_current_Amp(PhaseCurrents& currents);
 	static bool set_voltage_V(PhaseType phase, double voltage);
 
 };

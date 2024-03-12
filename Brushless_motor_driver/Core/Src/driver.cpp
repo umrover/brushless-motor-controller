@@ -13,11 +13,10 @@
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	// check if it gets here
-	double curr_A = CurrSensDriver::get_current_Amp(CurrSensDriver::PhaseType::A);
-	double curr_B = CurrSensDriver::get_current_Amp(CurrSensDriver::PhaseType::B);
-	double curr_C = CurrSensDriver::get_current_Amp(CurrSensDriver::PhaseType::C);
+	CurrSensDriver::PhaseCurrents PhaseCurrents;
+	CurrSensDriver::get_current_Amp(PhaseCurrents);
 
-	auto [curr_alpha, curr_beta] = tf_clarke(curr_A, curr_B, curr_C);
+	auto [curr_alpha, curr_beta] = tf_clarke(PhaseCurrents.iA, PhaseCurrents.iB, PhaseCurrents.iC);
 
 	double theta_d =  HallEncoderDriver::get_thetad();
 	auto [curr_d, curr_q] = tf_park(curr_alpha, curr_beta, theta_d);
