@@ -7,9 +7,6 @@
 #include "curr_sens.h"
 #include "stm32g4xx_hal.h"
 
-#define SHUNT_RES 0.005
-#define AMPLIFICATION 20*(SHUNT_RES)*
-
 ADC_HandleTypeDef* CurrSensDriver::ADC_handle = nullptr;
 uint32_t CurrSensDriver::ADCValues[3];
 
@@ -34,16 +31,19 @@ double CurrSensDriver::counts_to_amps(uint32_t ADC_counts){
 
 void CurrSensDriver::get_current_Amp(PhaseCurrents& currents){
 
-	uint32_t ADC_cummulative_val[3] = {0,0,0};
-	for (uint8_t i = 0; i<5; i++){
-		HAL_ADC_Start_DMA(ADC_handle, CurrSensDriver::ADCValues, 3);
-		for (uint8_t j = 0;j<3; j++){
-			ADC_cummulative_val[j] += ADCValues[j]&0xFFFFFFFF;
-		}
-	}
-	currents.iA = counts_to_amps(ADC_cummulative_val[0]/5);
-	currents.iB = counts_to_amps(ADC_cummulative_val[1]/5);
-	currents.iC = counts_to_amps(ADC_cummulative_val[2]/5);
+//	uint32_t ADC_cummulative_val[3] = {0,0,0};
+//	for (uint8_t i = 0; i<5; i++){
+//		HAL_ADC_Start_DMA(ADC_handle, CurrSensDriver::ADCValues, 3);
+//		for (uint8_t j = 0;j<3; j++){
+//			ADC_cummulative_val[j] += ADCValues[j]&0xFFFFFFFF;
+//		}
+//	}
+	HAL_ADC_Start_DMA(ADC_handle, CurrSensDriver::ADCValues, 3);
+
+
+//	currents.iA = counts_to_amps(ADC_cummulative_val[0]/5);
+//	currents.iB = counts_to_amps(ADC_cummulative_val[1]/5);
+//	currents.iC = counts_to_amps(ADC_cummulative_val[2]/5);
 	;
 
 }

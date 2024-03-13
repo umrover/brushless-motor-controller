@@ -7,8 +7,12 @@
 
 #ifndef INC_CURR_SENS_H_
 #define INC_CURR_SENS_H_
+
+#include <filter.h>
 #include <cstdint>
+#include <vector>
 #include "stm32g4xx_hal.h"
+#include "filter.h"
 
 #define MAX_ADC_READ_VOLTAGE 3.3
 #define MAX_ADC_COUNTS 4096
@@ -23,6 +27,12 @@ private:
 	double phase_currents[3];
 	static uint32_t ADCValues[3]; //PhaseA: 0; Phase B: 1; Phase C: 2;
 	static double counts_to_amps(uint32_t ADC_counts);
+
+	static MovingAvgFilter<double> curr_A_filter;
+	static MovingAvgFilter<double> curr_B_filter;
+	static MovingAvgFilter<double> curr_C_filter;
+
+
 
 public:
 

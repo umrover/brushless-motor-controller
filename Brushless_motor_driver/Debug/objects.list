@@ -1,5 +1,6 @@
 "./Core/Src/curr_sens.o"
 "./Core/Src/driver.o"
+"./Core/Src/filter.o"
 "./Core/Src/hall_encoder.o"
 "./Core/Src/main.o"
 "./Core/Src/main_bridge.o"
