@@ -2,7 +2,7 @@
  * curr_sens.cpp
  *
  *  Created on: Feb 1, 2024
- *      Author: Sashr
+ *      Author: Sashreek
  */
 #include "curr_sens.h"
 #include "stm32g4xx_hal.h"
@@ -10,15 +10,6 @@
 
 ADC_HandleTypeDef* CurrSensDriver::ADC_handle = nullptr;
 uint32_t CurrSensDriver::ADCValues[3];
-
-//void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
-//{
-//    // Read & Update The ADC Result
-//	if(hadc == CurrSensDriver::ADC_handle){
-//		CurrSensDriver::ADCValues[0] = HAL_ADC_GetValue(hadc);
-//	}
-//	HAL_ADC_Stop_IT(hadc);
-//}
 
 MovingAvgFilter CurrSensDriver::curr_A_filter(10);
 MovingAvgFilter CurrSensDriver::curr_B_filter(10);
@@ -36,13 +27,6 @@ double CurrSensDriver::counts_to_amps(uint32_t ADC_counts){
 
 void CurrSensDriver::get_current_Amp(PhaseCurrents& currents){
 
-//	uint32_t ADC_cummulative_val[3] = {0,0,0};
-//	for (uint8_t i = 0; i<5; i++){
-//		HAL_ADC_Start_DMA(ADC_handle, CurrSensDriver::ADCValues, 3);
-//		for (uint8_t j = 0;j<3; j++){
-//			ADC_cummulative_val[j] += ADCValues[j]&0xFFFFFFFF;
-//		}
-//	}
 	HAL_ADC_Start_DMA(ADC_handle, CurrSensDriver::ADCValues, 3);
 	curr_A_filter.add_new_element(counts_to_amps(ADCValues[0]));
 	curr_B_filter.add_new_element(counts_to_amps(ADCValues[1]));
@@ -50,7 +34,6 @@ void CurrSensDriver::get_current_Amp(PhaseCurrents& currents){
 	currents.iA = curr_A_filter.filtered_output();
 	currents.iB = curr_B_filter.filtered_output();
 	currents.iC = curr_C_filter.filtered_output();
-
 }
 
 
