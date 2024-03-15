@@ -18,7 +18,8 @@ void setup() {
 
 	// Enable the gate driver
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
+	HAL_Delay(10);
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_SET);
 
 	HAL_Delay(10);
 

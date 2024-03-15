@@ -28,11 +28,9 @@ private:
 	static uint32_t ADCValues[3]; //PhaseA: 0; Phase B: 1; Phase C: 2;
 	static double counts_to_amps(uint32_t ADC_counts);
 
-	static MovingAvgFilter<double> curr_A_filter;
-	static MovingAvgFilter<double> curr_B_filter;
-	static MovingAvgFilter<double> curr_C_filter;
-
-
+	static MovingAvgFilter curr_A_filter;
+	static MovingAvgFilter curr_B_filter;
+	static MovingAvgFilter curr_C_filter;
 
 public:
 

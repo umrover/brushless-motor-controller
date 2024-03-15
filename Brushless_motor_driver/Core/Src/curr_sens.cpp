@@ -6,6 +6,7 @@
  */
 #include "curr_sens.h"
 #include "stm32g4xx_hal.h"
+#include "filter.h"
 
 ADC_HandleTypeDef* CurrSensDriver::ADC_handle = nullptr;
 uint32_t CurrSensDriver::ADCValues[3];
@@ -18,6 +19,10 @@ uint32_t CurrSensDriver::ADCValues[3];
 //	}
 //	HAL_ADC_Stop_IT(hadc);
 //}
+
+MovingAvgFilter CurrSensDriver::curr_A_filter(10);
+MovingAvgFilter CurrSensDriver::curr_B_filter(10);
+MovingAvgFilter CurrSensDriver::curr_C_filter(10);
 
 double CurrSensDriver::counts_to_amps(uint32_t ADC_counts){
 
@@ -39,12 +44,12 @@ void CurrSensDriver::get_current_Amp(PhaseCurrents& currents){
 //		}
 //	}
 	HAL_ADC_Start_DMA(ADC_handle, CurrSensDriver::ADCValues, 3);
-
-
-//	currents.iA = counts_to_amps(ADC_cummulative_val[0]/5);
-//	currents.iB = counts_to_amps(ADC_cummulative_val[1]/5);
-//	currents.iC = counts_to_amps(ADC_cummulative_val[2]/5);
-	;
+	curr_A_filter.add_new_element(counts_to_amps(ADCValues[0]));
+	curr_B_filter.add_new_element(counts_to_amps(ADCValues[1]));
+	curr_C_filter.add_new_element(counts_to_amps(ADCValues[2]));
+	currents.iA = curr_A_filter.filtered_output();
+	currents.iB = curr_B_filter.filtered_output();
+	currents.iC = curr_C_filter.filtered_output();
 
 }
 

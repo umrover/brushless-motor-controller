@@ -11,24 +11,18 @@
 #include<vector>
 #include<cstdint>
 
-template <typename T> class MovingAvgFilter{
+class MovingAvgFilter{
 
 private:
 	uint8_t filter_size;
-	std::vector<T> cache;
-	T sum;
+	std::vector<double> cache;
+	double sum;
 
 public:
-	MovingAvgFilter(uint8_t filter_size):filter_size(filter_size){
-		cache.resize(filter_size, 0);
-		cache.reserve(filter_size);
-		sum = 0;
-	}
-	void add_new_element(T item);
-	T filtered_output();
+	MovingAvgFilter(uint8_t filter_size);
+	void add_new_element(double item);
+	double filtered_output();
 
 };
-
-
 
 #endif /* INC_FILTER_H_ */

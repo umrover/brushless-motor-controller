@@ -4,14 +4,6 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
-C_SRCS += \
-../Core/Src/main.c \
-../Core/Src/stm32g4xx_hal_msp.c \
-../Core/Src/stm32g4xx_it.c \
-../Core/Src/syscalls.c \
-../Core/Src/sysmem.c \
-../Core/Src/system_stm32g4xx.c 
-
 CPP_SRCS += \
 ../Core/Src/curr_sens.cpp \
 ../Core/Src/driver.cpp \
@@ -19,6 +11,14 @@ CPP_SRCS += \
 ../Core/Src/hall_encoder.cpp \
 ../Core/Src/main_bridge.cpp \
 ../Core/Src/math_utils.cpp 
+
+C_SRCS += \
+../Core/Src/main.c \
+../Core/Src/stm32g4xx_hal_msp.c \
+../Core/Src/stm32g4xx_it.c \
+../Core/Src/syscalls.c \
+../Core/Src/sysmem.c \
+../Core/Src/system_stm32g4xx.c 
 
 C_DEPS += \
 ./Core/Src/main.d \
