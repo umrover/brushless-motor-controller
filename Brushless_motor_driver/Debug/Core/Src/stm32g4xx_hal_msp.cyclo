@@ -6,4 +6,4 @@
 ../Core/Src/stm32g4xx_hal_msp.c:351:6:HAL_SPI_MspInit	2
 ../Core/Src/stm32g4xx_hal_msp.c:388:6:HAL_SPI_MspDeInit	2
 ../Core/Src/stm32g4xx_hal_msp.c:418:6:HAL_TIM_Base_MspInit	3
-../Core/Src/stm32g4xx_hal_msp.c:469:6:HAL_TIM_Base_MspDeInit	3
+../Core/Src/stm32g4xx_hal_msp.c:472:6:HAL_TIM_Base_MspDeInit	3

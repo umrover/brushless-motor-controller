@@ -1,2 +1,2 @@
-../Core/Src/main_bridge.cpp:14:6:void setup()	1
-../Core/Src/main_bridge.cpp:28:6:void loop()	1
+../Core/Src/main_bridge.cpp:15:6:void setup()	1
+../Core/Src/main_bridge.cpp:35:6:void loop()	1

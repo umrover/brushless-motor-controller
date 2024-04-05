@@ -1,9 +1,9 @@
-../Core/Src/curr_sens.cpp:27:8:static double CurrSensDriver::counts_to_amps(uint32_t)	1
-../Core/Src/curr_sens.cpp:37:6:static void CurrSensDriver::get_current_Amp(CurrSensDriver::PhaseCurrents&)	1
-../Core/Src/curr_sens.cpp:58:8:static double CurrSensDriver::get_voltage_V(CurrSensDriver::VoltageSenseType)	1
-../Core/Src/curr_sens.cpp:62:6:static bool CurrSensDriver::set_voltage_V(CurrSensDriver::PhaseType, double)	1
+../Core/Src/curr_sens.cpp:18:8:static double CurrSensDriver::counts_to_amps(uint32_t)	1
+../Core/Src/curr_sens.cpp:28:6:static void CurrSensDriver::get_current_Amp(CurrSensDriver::PhaseCurrents&)	1
+../Core/Src/curr_sens.cpp:41:8:static double CurrSensDriver::get_voltage_V(CurrSensDriver::VoltageSenseType)	1
+../Core/Src/curr_sens.cpp:45:6:static bool CurrSensDriver::set_voltage_V(CurrSensDriver::PhaseType, double)	1
 ../Core/Inc/filter.h:14:7:MovingAvgFilter::~MovingAvgFilter()	1
-../Core/Src/curr_sens.cpp:64:1:void __static_initialization_and_destruction_0(int, int)	5
+../Core/Src/curr_sens.cpp:47:1:void __static_initialization_and_destruction_0(int, int)	5
 C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235\tools\bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/include/c++/11.3.1/bits/stl_vector.h:678:7:std::vector<_Tp, _Alloc>::~vector() [with _Tp = double; _Alloc = std::allocator<double>]	1
 C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235\tools\bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/include/c++/11.3.1/bits/stl_vector.h:128:14:std::_Vector_base<double, std::allocator<double> >::_Vector_impl::~_Vector_impl()	1
 C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235\tools\bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/include/c++/11.3.1/bits/stl_vector.h:333:7:std::_Vector_base<_Tp, _Alloc>::~_Vector_base() [with _Tp = double; _Alloc = std::allocator<double>]	1
@@ -16,5 +16,5 @@ C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235\tools\arm-none-eabi\include\c++\11.3.1\bits\alloc_traits.h:495:7:static void std::allocator_traits<std::allocator<_Tp1> >::deallocate(std::allocator_traits<std::allocator<_Tp1> >::allocator_type&, std::allocator_traits<std::allocator<_Tp1> >::pointer, std::allocator_traits<std::allocator<_Tp1> >::size_type) [with _Tp = double]	1
 C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235\tools\arm-none-eabi\include\c++\11.3.1\bits\stl_construct.h:172:9:static void std::_Destroy_aux<true>::__destroy(_ForwardIterator, _ForwardIterator) [with _ForwardIterator = double*]	1
 C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235\tools\arm-none-eabi\include\c++\11.3.1\ext\new_allocator.h:132:7:void __gnu_cxx::new_allocator<_Tp>::deallocate(_Tp*, __gnu_cxx::new_allocator<_Tp>::size_type) [with _Tp = double]	1
-../Core/Src/curr_sens.cpp:64:1:cpp)	1
-../Core/Src/curr_sens.cpp:64:1:cpp)	1
+../Core/Src/curr_sens.cpp:47:1:cpp)	1
+../Core/Src/curr_sens.cpp:47:1:cpp)	1

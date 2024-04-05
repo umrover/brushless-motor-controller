@@ -9,6 +9,10 @@
 #define INC_HALL_ENCODER_H_
 
 
+#define NUM_POLES 16
+#define DELTA_THETA 360/NUM_POLES
+
+
 class HallEncoderDriver{
 public:
 	static double get_thetad();

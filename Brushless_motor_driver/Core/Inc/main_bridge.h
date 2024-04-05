@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+static double volatile motor_velocity;
+static double volatile motor_position;
 
 void loop();
 void setup();

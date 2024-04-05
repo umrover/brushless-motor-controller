@@ -1,3 +1,4 @@
+"./Core/Src/bldc.o"
 "./Core/Src/curr_sens.o"
 "./Core/Src/driver.o"
 "./Core/Src/filter.o"
