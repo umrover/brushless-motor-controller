@@ -8,12 +8,11 @@
 #ifndef INC_MAIN_BRIDGE_H_
 #define INC_MAIN_BRIDGE_H_
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-static double volatile motor_velocity;
-static double volatile motor_position;
 
 void loop();
 void setup();

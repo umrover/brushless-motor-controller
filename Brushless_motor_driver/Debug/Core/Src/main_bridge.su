@@ -1,2 +1,0 @@
-../Core/Src/main_bridge.cpp:15:6:void setup()	8	static
-../Core/Src/main_bridge.cpp:35:6:void loop()	32	static
