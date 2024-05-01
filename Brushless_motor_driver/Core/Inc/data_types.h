@@ -56,6 +56,9 @@ class HallEncoderState {
 
 private:
 	uint8_t state;
+	const uint8_t encoder_LUT[7] = { 0 /*0 is just a placeholder - range 1-6*/,
+				2, 6, 1, 4, 3, 5 };
+
 
 public:
 	HallEncoderState(uint8_t H1, uint8_t H2, uint8_t H3);

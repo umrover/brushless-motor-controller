@@ -9,6 +9,7 @@
 #define INC_HALL_ENCODER_H_
 
 #include "data_types.h"
+#include<memory>
 
 #define NUM_POLES 16  // one day this will be configurable...
 #define DELTA_THETA 360/NUM_POLES
@@ -16,9 +17,6 @@
 #define FWD 1
 #define BWD -1
 #define HALT 0
-
-const uint8_t encoder_LUT[7] = { 0 /*0 is just a placeholder - range 1-6*/,
-			2, 6, 1, 4, 3, 5 };
 
 
 
@@ -44,15 +42,17 @@ private:
 	 *
 	 *make sure theta is a %360 value.
 	 * */
-	const uint8_t encoder_LUT[7] = { 0, 2, 6, 1, 4, 3, 5 };
 	AngleType angle;
+	std::unique_ptr<HallEncoderState> prev_state;
+	std::unique_ptr<HallEncoderState> curr_state;
 
 public:
 	HallEncoderDriver();
-	static double get_thetad();
+	void setState(uint8_t H1, uint8_t H2, uint8_t H3);
+
+
+	double get_thetad();
 	int8_t getDirection();
-	HallEncoderState prev_state;
-	HallEncoderState curr_state;
 };
 
 #endif /* INC_HALL_ENCODER_H_ */

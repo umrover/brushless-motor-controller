@@ -21,9 +21,6 @@ endif
 ifneq ($(strip $(C++_DEPS)),)
 -include $(C++_DEPS)
 endif
-ifneq ($(strip $(CCM_DEPS)),)
--include $(CCM_DEPS)
-endif
 ifneq ($(strip $(C_UPPER_DEPS)),)
 -include $(C_UPPER_DEPS)
 endif
@@ -35,12 +32,6 @@ ifneq ($(strip $(S_DEPS)),)
 endif
 ifneq ($(strip $(S_UPPER_DEPS)),)
 -include $(S_UPPER_DEPS)
-endif
-ifneq ($(strip $(CXXM_DEPS)),)
--include $(CXXM_DEPS)
-endif
-ifneq ($(strip $(C++M_DEPS)),)
--include $(C++M_DEPS)
 endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
@@ -84,8 +75,8 @@ all: main-build
 main-build: Brushless_motor_driver.elf secondary-outputs
 
 # Tool invocations
-Brushless_motor_driver.elf Brushless_motor_driver.map: $(OBJS) $(USER_OBJS) C:\Users\Sashr\dev\brushless-motor-driver\fw\brushless-motor-controller\Brushless_motor_driver\STM32G473VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "Brushless_motor_driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Sashr\dev\brushless-motor-driver\fw\brushless-motor-controller\Brushless_motor_driver\STM32G473VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Brushless_motor_driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Brushless_motor_driver.elf Brushless_motor_driver.map: $(OBJS) $(USER_OBJS) C:\Users\Sashreek\dev\brushless-motor-controller\Brushless_motor_driver\STM32G473VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "Brushless_motor_driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Sashreek\dev\brushless-motor-controller\Brushless_motor_driver\STM32G473VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Brushless_motor_driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

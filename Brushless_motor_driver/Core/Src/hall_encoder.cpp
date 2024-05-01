@@ -8,13 +8,13 @@
 #include "stm32g4xx_hal.h"
 
 HallEncoderDriver::HallEncoderDriver(){
-	prev_state = HallEncoderState((uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0),
+	prev_state = std::make_unique<HallEncoderState>(HallEncoderState((uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0),
 			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_1),
-			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_2));
+			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_2)));
 
-	curr_state = HallEncoderState((uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0),
+	curr_state = std::make_unique<HallEncoderState>(HallEncoderState((uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0),
 			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_1),
-			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_2));
+			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_2)));
 }
 
 double HallEncoderDriver::get_thetad() {
@@ -22,7 +22,7 @@ double HallEncoderDriver::get_thetad() {
 }
 
 int8_t HallEncoderDriver::getDirection() {
-	int8_t diff = prev_state.getState() - curr_state.getState();
+	int8_t diff = prev_state->getState() - curr_state->getState();
 
 	// NOTE assumes we only transition one state at a time
 
@@ -36,5 +36,16 @@ int8_t HallEncoderDriver::getDirection() {
 		// OHNO!!!
 		return -128;
 	}
+
+}
+
+void HallEncoderDriver::setState(uint8_t H1, uint8_t H2, uint8_t H3){
+	*prev_state = *curr_state;
+	this->curr_state->setState(H1, H2, H3);
+
+	int8_t direction = getDirection();
+	AngleType increment(DELTA_THETA * direction);
+	this->angle += increment;
+
 
 }

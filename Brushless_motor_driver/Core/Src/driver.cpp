@@ -12,6 +12,8 @@
 #include "main_bridge.h"
 #include <algorithm>
 
+extern std::unique_ptr<HallEncoderDriver> hall_driver;
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	// check if it gets here
 	CurrSensDriver::PhaseCurrents PhaseCurrents;
@@ -20,7 +22,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	auto [curr_alpha, curr_beta] = tf_clarke(PhaseCurrents.iA, PhaseCurrents.iB,
 			PhaseCurrents.iC);
 
-	double theta_d = HallEncoderDriver::get_thetad();
+	double theta_d = hall_driver->get_thetad();
 	auto [curr_d, curr_q] = tf_park(curr_alpha, curr_beta, theta_d);
 
 	return;
@@ -36,20 +38,17 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 
 	// Time since last falling edge of each Hall Effect
 	// TODO: need to reset CCR to 0 at the end
-	volatile uint32_t *H1 = &TIM3->CCR1;
-	volatile uint32_t *H2 = &TIM3->CCR2;
-	volatile uint32_t *H3 = &TIM3->CCR3;
+//	uint32_t *H1 = &TIM3->CCR1;
+//	uint32_t *H2 = &TIM3->CCR2;
+//	uint32_t *H3 = &TIM3->CCR3;
 
-	hall_driver.curr_state.setState(
+	hall_driver->setState(
 			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0),
 			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_1),
 			(uint8_t) HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_2));
 
-	int8_t direction = hall_driver.getDirection();
 
 	// int8_t direction = (hall_driver.prev_state > cu) ? (-1) : 1;
-	AngleType increment(DELTA_THETA * direction);
-	hall_driver.angle =  hall_driver.angle + increment;
 
 //	std::vector<volatile uint32_t*> encoder_timer_readings(3);
 //	encoder_timer_readings = {H1, H2, H3};

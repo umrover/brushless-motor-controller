@@ -114,9 +114,6 @@ void HallEncoderState::operator=(HallEncoderState other) {
 		this->state = other.state;
 	}
 
-void HallEncoderState::operator=(HallEncoderState other) {
-		this->state = other.state;
-	}
 uint8_t HallEncoderState::getState() {return state;}
 
 void HallEncoderState::setState(uint8_t H1, uint8_t H2, uint8_t H3) {

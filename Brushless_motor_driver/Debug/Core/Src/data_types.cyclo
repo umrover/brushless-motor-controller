@@ -1,0 +1,27 @@
+C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.1.202309131626\tools\arm-none-eabi\include\c++\11.3.1\arm-none-eabi\thumb\v7e-m+fp\hard\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
+../Core/Src/data_types.cpp:12:1:AngleType::AngleType()	1
+../Core/Src/data_types.cpp:14:1:AngleType::AngleType(double)	1
+../Core/Src/data_types.cpp:19:6:void AngleType::setAngle(double)	2
+../Core/Src/data_types.cpp:26:8:double AngleType::getAngleRad() const	1
+../Core/Src/data_types.cpp:31:8:double AngleType::getAngleDeg() const	1
+../Core/Src/data_types.cpp:36:11:AngleType AngleType::operator+() const	1
+../Core/Src/data_types.cpp:40:11:AngleType AngleType::operator-() const	1
+../Core/Src/data_types.cpp:45:11:AngleType AngleType::operator+(const AngleType&) const	1
+../Core/Src/data_types.cpp:49:11:AngleType AngleType::operator-(const AngleType&) const	1
+../Core/Src/data_types.cpp:53:11:AngleType AngleType::operator*(double) const	1
+../Core/Src/data_types.cpp:57:11:AngleType AngleType::operator/(double) const	2
+../Core/Src/data_types.cpp:65:12:AngleType& AngleType::operator+=(const AngleType&)	1
+../Core/Src/data_types.cpp:71:12:AngleType& AngleType::operator-=(const AngleType&)	1
+../Core/Src/data_types.cpp:78:6:bool AngleType::operator==(const AngleType&) const	2
+../Core/Src/data_types.cpp:82:6:bool AngleType::operator!=(const AngleType&) const	2
+../Core/Src/data_types.cpp:86:6:bool AngleType::operator<(const AngleType&) const	2
+../Core/Src/data_types.cpp:90:6:bool AngleType::operator>(const AngleType&) const	2
+../Core/Src/data_types.cpp:94:6:bool AngleType::operator<=(const AngleType&) const	2
+../Core/Src/data_types.cpp:98:6:bool AngleType::operator>=(const AngleType&) const	2
+../Core/Src/data_types.cpp:108:1:HallEncoderState::HallEncoderState(uint8_t, uint8_t, uint8_t)	1
+../Core/Src/data_types.cpp:113:6:void HallEncoderState::operator=(HallEncoderState)	1
+../Core/Src/data_types.cpp:117:9:uint8_t HallEncoderState::getState()	1
+../Core/Src/data_types.cpp:119:6:void HallEncoderState::setState(uint8_t, uint8_t, uint8_t)	1
+../Core/Src/data_types.cpp:122:2:void __static_initialization_and_destruction_0(int, int)	5
+../Core/Src/data_types.cpp:122:2:cpp)	1
+../Core/Src/data_types.cpp:122:2:cpp)	1
