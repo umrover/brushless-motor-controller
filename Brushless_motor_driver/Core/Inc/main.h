@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define HALL_1_INPUT_Pin GPIO_PIN_2
+#define HALL_1_INPUT_GPIO_Port GPIOE
 #define CURR_A_Pin GPIO_PIN_0
 #define CURR_A_GPIO_Port GPIOC
 #define CURR_B_Pin GPIO_PIN_1
@@ -75,11 +77,9 @@ void Error_Handler(void);
 #define SOURCE_VOLTAGE_GPIO_Port GPIOA
 #define MOTOR_TEMP_Pin GPIO_PIN_5
 #define MOTOR_TEMP_GPIO_Port GPIOC
-#define HALL1_INPUT_Pin GPIO_PIN_6
-#define HALL1_INPUT_GPIO_Port GPIOC
-#define HALL_2_INPUT_Pin GPIO_PIN_7
-#define HALL_2_INPUT_GPIO_Port GPIOC
-#define HALL_3_INPUT_Pin GPIO_PIN_8
+#define HALL_2_INPUT_Pin GPIO_PIN_9
+#define HALL_2_INPUT_GPIO_Port GPIOE
+#define HALL_3_INPUT_Pin GPIO_PIN_6
 #define HALL_3_INPUT_GPIO_Port GPIOC
 #define CAN_SHDN_Pin GPIO_PIN_8
 #define CAN_SHDN_GPIO_Port GPIOA

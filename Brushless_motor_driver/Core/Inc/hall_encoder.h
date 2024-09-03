@@ -12,11 +12,10 @@
 #include<memory>
 
 #define NUM_POLES 16  // one day this will be configurable...
-#define DELTA_THETA 360/NUM_POLES
+#define DELTA_THETA 360/(NUM_POLES/2)
 
 #define FWD 1
 #define BWD -1
-#define HALT 0
 
 
 

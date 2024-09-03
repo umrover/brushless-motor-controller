@@ -66,6 +66,9 @@ public:
 	void operator=(HallEncoderState other);
 	void setState(uint8_t H1, uint8_t H2, uint8_t H3);
 
+	bool operator==(const HallEncoderState& other) const;
+	bool operator!=(const HallEncoderState& other) const;
+
 };
 
 #endif /* INC_DATA_TYPES_H_ */

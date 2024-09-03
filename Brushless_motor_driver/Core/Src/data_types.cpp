@@ -120,4 +120,10 @@ void HallEncoderState::setState(uint8_t H1, uint8_t H2, uint8_t H3) {
 		uint8_t state_read = 0x0001 & (H1 << 2 | H2 << 1 | H3);
 		state = encoder_LUT[state_read];
 	}
+bool HallEncoderState::operator==(const HallEncoderState& other) const {
+    return other.state == state;
+}
 
+bool HallEncoderState::operator!=(const HallEncoderState& other) const {
+    return other.state != state;
+}
