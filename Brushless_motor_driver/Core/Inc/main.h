@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -67,12 +69,12 @@ void Error_Handler(void);
 #define CURR_C_GPIO_Port GPIOC
 #define ADC_TEMP_Pin GPIO_PIN_3
 #define ADC_TEMP_GPIO_Port GPIOC
-#define SHA_V_Pin GPIO_PIN_0
-#define SHA_V_GPIO_Port GPIOA
-#define SHB_V_Pin GPIO_PIN_1
-#define SHB_V_GPIO_Port GPIOA
-#define SHC_V_Pin GPIO_PIN_2
-#define SHC_V_GPIO_Port GPIOA
+#define SHA_V_SENSE_Pin GPIO_PIN_0
+#define SHA_V_SENSE_GPIO_Port GPIOA
+#define SHB_V_SENSE_Pin GPIO_PIN_1
+#define SHB_V_SENSE_GPIO_Port GPIOA
+#define SHC_V_SENSE_Pin GPIO_PIN_2
+#define SHC_V_SENSE_GPIO_Port GPIOA
 #define SOURCE_VOLTAGE_Pin GPIO_PIN_3
 #define SOURCE_VOLTAGE_GPIO_Port GPIOA
 #define MOTOR_TEMP_Pin GPIO_PIN_5
@@ -83,12 +85,6 @@ void Error_Handler(void);
 #define HALL_3_INPUT_GPIO_Port GPIOC
 #define CAN_SHDN_Pin GPIO_PIN_8
 #define CAN_SHDN_GPIO_Port GPIOA
-#define H1_OUTPUT_Pin GPIO_PIN_0
-#define H1_OUTPUT_GPIO_Port GPIOD
-#define H2_OUTPUT_Pin GPIO_PIN_1
-#define H2_OUTPUT_GPIO_Port GPIOD
-#define H3_OUTPUT_Pin GPIO_PIN_2
-#define H3_OUTPUT_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 
