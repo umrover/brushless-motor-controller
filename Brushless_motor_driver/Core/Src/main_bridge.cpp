@@ -13,7 +13,7 @@
 
 extern ADC_HandleTypeDef hadc1;
 extern TIM_HandleTypeDef htim3;
-extern UART_HandleTypeDef huart4;
+//extern UART_HandleTypeDef huart4;
 
 
 std::unique_ptr<HallEncoderDriver> hall_driver;
@@ -43,7 +43,7 @@ void loop() {
 //	HAL_ADC_Start_IT(CurrSensDriver::ADC_handle);
 	char str[80] = {};
 	sprintf(str, "angle = %f\r\n", hall_driver->get_thetad());
-	HAL_UART_Transmit (&huart4, reinterpret_cast<uint8_t*>(&str[0]), sizeof(str), 10);
+//	HAL_UART_Transmit (&huart4, reinterpret_cast<uint8_t*>(&str[0]), sizeof(str), 10);
 	CurrSensDriver::PhaseCurrents PhaseCurrents;
 	CurrSensDriver::get_current_Amp(PhaseCurrents);
 
