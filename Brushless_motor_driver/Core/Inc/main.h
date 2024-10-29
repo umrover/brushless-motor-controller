@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,6 +59,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define HALL_STATE_1_Pin GPIO_PIN_2
+#define HALL_STATE_1_GPIO_Port GPIOE
 #define CURR_A_Pin GPIO_PIN_0
 #define CURR_A_GPIO_Port GPIOC
 #define CURR_B_Pin GPIO_PIN_1
@@ -73,22 +77,32 @@ void Error_Handler(void);
 #define SHC_V_GPIO_Port GPIOA
 #define SOURCE_VOLTAGE_Pin GPIO_PIN_3
 #define SOURCE_VOLTAGE_GPIO_Port GPIOA
+#define SPI1_CS_Pin GPIO_PIN_4
+#define SPI1_CS_GPIO_Port GPIOA
 #define MOTOR_TEMP_Pin GPIO_PIN_5
 #define MOTOR_TEMP_GPIO_Port GPIOC
-#define HALL1_INPUT_Pin GPIO_PIN_6
-#define HALL1_INPUT_GPIO_Port GPIOC
-#define HALL_2_INPUT_Pin GPIO_PIN_7
-#define HALL_2_INPUT_GPIO_Port GPIOC
-#define HALL_3_INPUT_Pin GPIO_PIN_8
-#define HALL_3_INPUT_GPIO_Port GPIOC
-#define CAN_SHDN_Pin GPIO_PIN_8
-#define CAN_SHDN_GPIO_Port GPIOA
-#define H1_OUTPUT_Pin GPIO_PIN_0
-#define H1_OUTPUT_GPIO_Port GPIOD
-#define H2_OUTPUT_Pin GPIO_PIN_1
-#define H2_OUTPUT_GPIO_Port GPIOD
-#define H3_OUTPUT_Pin GPIO_PIN_2
-#define H3_OUTPUT_GPIO_Port GPIOD
+#define HALL_STATE_2_Pin GPIO_PIN_9
+#define HALL_STATE_2_GPIO_Port GPIOE
+#define CAN_SHDN_Pin GPIO_PIN_15
+#define CAN_SHDN_GPIO_Port GPIOD
+#define HALL_STATE_3_Pin GPIO_PIN_6
+#define HALL_STATE_3_GPIO_Port GPIOC
+#define SPI3_CS_Pin GPIO_PIN_15
+#define SPI3_CS_GPIO_Port GPIOA
+#define L1_Pin GPIO_PIN_0
+#define L1_GPIO_Port GPIOD
+#define H1_Pin GPIO_PIN_1
+#define H1_GPIO_Port GPIOD
+#define nFAULT_Pin GPIO_PIN_7
+#define nFAULT_GPIO_Port GPIOD
+#define L2_Pin GPIO_PIN_3
+#define L2_GPIO_Port GPIOB
+#define H2_Pin GPIO_PIN_6
+#define H2_GPIO_Port GPIOB
+#define L3_Pin GPIO_PIN_0
+#define L3_GPIO_Port GPIOE
+#define H3_Pin GPIO_PIN_1
+#define H3_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

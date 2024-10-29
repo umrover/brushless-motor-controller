@@ -15,7 +15,6 @@ extern ADC_HandleTypeDef hadc1;
 extern TIM_HandleTypeDef htim3;
 extern UART_HandleTypeDef huart4;
 
-uint64_t ADC_count = 0;
 
 std::unique_ptr<HallEncoderDriver> hall_driver;
 
