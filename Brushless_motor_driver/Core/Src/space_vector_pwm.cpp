@@ -32,10 +32,12 @@ void SpaceVectorPWM::getDutyCycles(float& dutyCycleA, float& dutyCycleB, float& 
 
 }
 
-SpaceVectorPWM::calculateDutyCycles(){
+void SpaceVectorPWM::calculateDutyCycles(){
 	// function that calculates duty-cycles on each phase given the alpha and beta values
 	// The space of all p0ssible vectors can be divided into 6 sectors: 0,1,2,3,4,5.
 	// The boundaries of each of these sectors are the basic vectors
+
+
 }
 
 

@@ -11,6 +11,10 @@
 #include "stm32g4xx_hal.h"
 #include <cmath>
 
+
+extern CORDIC_HandleTypeDef hcordic;
+
+
 class STM32CORDIC {
 public:
     // Enumeration to define supported operations for CORDIC core
@@ -27,26 +31,24 @@ public:
     ~STM32CORDIC();
 
     // Initializes the CORDIC peripheral
-    bool init();
+    static bool init();
 
     // Performs sine operation
-    float computeSin(float angle);
+    static float computeSin(float angle);
 
     // Performs cosine operation
-    float computeCos(float angle);
+    static float computeCos(float angle);
 
     // Performs arctangent operation
-    float computeAtan(float y, float x);
+    static float computeAtan(float y, float x);
 
     // Rotates vector by an angle
-    float computeSqrt(float num);
+    static float computeSqrt(float num);
 
 private:
     // Configures the CORDIC peripheral settings
     void configure(Operation operation, uint32_t precision);
 
-    Operation currentOperation;
-    uint32_t precision;
 };
 
 #endif /* INC_CORDIC_DRIVER_H_ */
