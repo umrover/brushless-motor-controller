@@ -5,10 +5,11 @@
  *      Author: Sashreek
  */
 #include "space_vector_pwm.h"
-
 #include <cmath>
 
-SpaceVectorPWM::SpaceVectorPWM(float maxModulationIndex, TimerChannel_t PhaseA, TimerChannel_t PhaseB, TimerChannel_t PhaseC ){
+#define SQRT_3 1.7320508075688772
+
+SpaceVectorPWM::SpaceVectorPWM(double maxModulationIndex, TimerChannel_t PhaseA, TimerChannel_t PhaseB, TimerChannel_t PhaseC ){
 	this->maxModulationIndex = maxModulationIndex;
 	PhaseA_iface = PhaseA;
 	PhaseB_iface = PhaseB;
@@ -19,13 +20,13 @@ SpaceVectorPWM::SpaceVectorPWM(float maxModulationIndex, TimerChannel_t PhaseA, 
 	HAL_TIM_PWM_Start(PhaseC_iface.htim, PhaseC_iface.channel);
 }
 
-void SpaceVectorPWM::setInputVoltages(float alphaVoltage, float betaVoltage){
+void SpaceVectorPWM::setInputVoltages(double alphaVoltage, double betaVoltage){
 
 	this->alphaVoltage = alphaVoltage;
 	this->betaVoltage = betaVoltage;
 }
 
-void SpaceVectorPWM::getDutyCycles(float& dutyCycleA, float& dutyCycleB, float& dutyCycleC) const{
+void SpaceVectorPWM::getDutyCycles(double& dutyCycleA, double& dutyCycleB, double& dutyCycleC) const{
 	dutyCycleA = this->dutyCycleA;
 	dutyCycleB = this->dutyCycleB;
 	dutyCycleC = this->dutyCycleC;
@@ -42,12 +43,12 @@ uint8_t SpaceVectorPWM::calculate_sector() {
 	// (240, 320]	- 6
 	// (320, 0]		- 2
 
-	float U_alpha = this->alphaVoltage;
-	float U_beta = this->betaVoltage;
+	double U_alpha = this->alphaVoltage;
+	double U_beta = this->betaVoltage;
 
     double V_ref1 = U_beta;
-    double V_ref2 = (-U_beta + U_alpha * sqrt(3)) / 2;
-    double V_ref3 = (-U_beta - U_alpha * sqrt(3)) / 2;
+    double V_ref2 = (-U_beta + U_alpha * SQRT_3) / 2;
+    double V_ref3 = (-U_beta - U_alpha * SQRT_3) / 2;
 
     // Determine the values of a, b, and c based on the conditions
     int a = (V_ref1 > 0) ? 1 : 0;
@@ -59,6 +60,42 @@ uint8_t SpaceVectorPWM::calculate_sector() {
 
     return sector;
 }
+
+void SpaceVectorPWM::calculate_XYZ(double U_alpha, double U_beta){
+	double X  = U_beta;
+	double Y = (SQRT_3 * U_alpha + U_beta) / 2;
+	double Z = (-SQRT_3 * U_alpha + U_beta) / 2;
+}
+
+
+std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector){
+
+	std::pair<double, double> result;
+	switch (sector){
+	case 1:
+		result.first = this->Z;
+		result.second = this->Y;
+
+	case 2:
+		result.first = this-Y;
+		result.second = -1*this->X;
+
+	case 3:
+		result.first = -1*this->Z;
+		result.second = this->X;
+
+	case 4:
+		result.first = -1*this->X;
+		result.second = this->Z;
+
+	case 5:
+		result.first = this->X;
+		result.second = this->Y;
+
+	}
+}
+
+
 
 void SpaceVectorPWM::calculateDutyCycles(){
 	// function that calculates duty-cycles on each phase given the alpha and beta values
@@ -82,9 +119,9 @@ void SpaceVectorPWM::writePWM(){
 
 	// convert duty cycle to CCR
 	// write the CCRs
-	float dutyCycleA;
-	float dutyCycleB;
-	float dutyCycleC;
+	double dutyCycleA;
+	double dutyCycleB;
+	double dutyCycleC;
 
 	uint32_t ARR_phase_A = PhaseA_iface.TIM_obj->ARR;
 	uint32_t ARR_phase_B = PhaseB_iface.TIM_obj->ARR;
