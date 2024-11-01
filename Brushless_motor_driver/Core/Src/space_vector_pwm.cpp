@@ -10,11 +10,15 @@
 
 #define SQRT_3 1.7320508075688772
 
+
+
 SpaceVectorPWM::SpaceVectorPWM(double maxModulationIndex, TimerChannel_t PhaseA, TimerChannel_t PhaseB, TimerChannel_t PhaseC ){
 	this->maxModulationIndex = maxModulationIndex;
 	PhaseA_iface = PhaseA;
 	PhaseB_iface = PhaseB;
 	PhaseC_iface = PhaseC;
+
+	this->Peripheral_frequency  = 64000000.0; // clock frequency on the peripheral bus
 
 	HAL_TIM_PWM_Start(PhaseA_iface.htim, PhaseA_iface.channel);
 	HAL_TIM_PWM_Start(PhaseB_iface.htim, PhaseB_iface.channel);
@@ -65,9 +69,9 @@ uint8_t SpaceVectorPWM::calculate_sector() {
 void SpaceVectorPWM::calculate_XYZ(){
 	double U_alpha = this->alphaVoltage;
 	double U_beta = this->betaVoltage;
-	double X  = U_beta;
-	double Y = (SQRT_3 * U_alpha + U_beta) / 2;
-	double Z = (-SQRT_3 * U_alpha + U_beta) / 2;
+	this->X  = U_beta;
+	this->Y = (SQRT_3 * U_alpha + U_beta) / 2;
+	this->Z = (-SQRT_3 * U_alpha + U_beta) / 2;
 }
 
 
@@ -80,7 +84,7 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 		result.second = this->Y;
 
 	case 2:
-		result.first = this-Y;
+		result.first = this->Y;
 		result.second = -1*this->X;
 
 	case 3:
@@ -101,22 +105,11 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 
 void SpaceVectorPWM::calculate_relative_time_on(uint8_t sector, double PWM_Period){
 
-	uint32_t prescaler_A = PhaseA_iface.TIM_obj->PSC;
-	uint32_t prescaler_B = PhaseB_iface.TIM_obj->PSC;
-	uint32_t prescaler_C = PhaseC_iface.TIM_obj->PSC;
-
-	double Peripheral_frequency  = 64000000.0; // clock frequency on the peripheral bus
-
-	uint32_t ARR_A = PhaseA_iface.TIM_obj->ARR;
-	uint32_t ARR_B = PhaseB_iface.TIM_obj->ARR;
-	uint32_t ARR_C = PhaseC_iface.TIM_obj->ARR;
-
-
 	std::pair<double, double> t1_t2_pair = calculate_vector_ontime(sector);
 	double t1 = t1_t2_pair.first;
 	double t2 = t1_t2_pair.second;
 
-	this->taon = (PWM_Period_A - t1 - t2)/2;
+	this->taon = (PWM_Period - t1 - t2)/2;
 	this->tbon = (this->taon + t1);
 	this->tcon = (this->tbon + t2);
 
@@ -137,6 +130,14 @@ void SpaceVectorPWM::calculateDutyCycles(){
 	//	- Determination of the duty cycle taon, tbon and tcon
 	//	- Assignment of the duty cycles to Ta, Tb and Tc
 
+
+	uint32_t prescaler_A = PhaseA_iface.TIM_obj->PSC;
+//	uint32_t prescaler_B = PhaseB_iface.TIM_obj->PSC;
+//	uint32_t prescaler_C = PhaseC_iface.TIM_obj->PSC;
+
+	uint32_t ARR_A = PhaseA_iface.TIM_obj->ARR;
+//	uint32_t ARR_B = PhaseB_iface.TIM_obj->ARR;
+//	uint32_t ARR_C = PhaseC_iface.TIM_obj->ARR;
 	double PWM_Period_A = ((ARR_A+1)*(prescaler_A+1))/(Peripheral_frequency);
 	//	double PWM_Period_B = ((ARR_B+1)*(prescaler_B+1))/(Peripheral_frequency);
 	//	double PWM_Period_C = ((ARR_C+1)*(prescaler_C+1))/(Peripheral_frequency);
@@ -196,21 +197,19 @@ void SpaceVectorPWM::writePWM(){
 
 	// convert duty cycle to CCR
 	// write the CCRs
-	double dutyCycleA;
-	double dutyCycleB;
-	double dutyCycleC;
 
 	uint32_t ARR_phase_A = PhaseA_iface.TIM_obj->ARR;
 	uint32_t ARR_phase_B = PhaseB_iface.TIM_obj->ARR;
 	uint32_t ARR_phase_C = PhaseC_iface.TIM_obj->ARR;
 
-	uint32_t CCR_to_set_Phase_A = (uint32_t) (dutyCycleA * ARR_phase_A);
-	uint32_t CCR_to_set_Phase_B = (uint32_t) (dutyCycleB * ARR_phase_B);
-	uint32_t CCR_to_set_Phase_C = (uint32_t) (dutyCycleC * ARR_phase_C);
+	uint32_t CCR_to_set_Phase_A = (uint32_t) (this->dutyCycleA * ARR_phase_A);
+	uint32_t CCR_to_set_Phase_B = (uint32_t) (this->dutyCycleB * ARR_phase_B);
+	uint32_t CCR_to_set_Phase_C = (uint32_t) (this->dutyCycleC * ARR_phase_C);
 
-	PhaseA_iface.TIM_obj->PhaseA_iface.CCR_addr;
-	PhaseB_iface.TIM_obj->PhaseB_iface.CCR_addr;
-	PhaseC_iface.TIM_obj->PhaseC_iface.CCR_addr;
+
+	*(PhaseA_iface.CCR_addr) = CCR_to_set_Phase_A;
+	*(PhaseB_iface.CCR_addr) = CCR_to_set_Phase_B;
+	*(PhaseC_iface.CCR_addr) = CCR_to_set_Phase_C;
 
 
 }

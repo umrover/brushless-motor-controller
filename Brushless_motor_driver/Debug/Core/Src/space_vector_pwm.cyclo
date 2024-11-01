@@ -1,0 +1,9 @@
+../Core/Src/space_vector_pwm.cpp:15:1:SpaceVectorPWM::SpaceVectorPWM(double, TimerChannel_t, TimerChannel_t, TimerChannel_t)	1
+../Core/Src/space_vector_pwm.cpp:28:6:void SpaceVectorPWM::setInputVoltages(double, double)	1
+../Core/Src/space_vector_pwm.cpp:34:6:void SpaceVectorPWM::getDutyCycles(double&, double&, double&) const	1
+../Core/Src/space_vector_pwm.cpp:41:9:uint8_t SpaceVectorPWM::calculate_sector()	4
+../Core/Src/space_vector_pwm.cpp:69:6:void SpaceVectorPWM::calculate_XYZ()	1
+../Core/Src/space_vector_pwm.cpp:78:27:std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t)	6
+../Core/Src/space_vector_pwm.cpp:106:6:void SpaceVectorPWM::calculate_relative_time_on(uint8_t, double)	1
+../Core/Src/space_vector_pwm.cpp:121:6:void SpaceVectorPWM::calculateDutyCycles()	6
+../Core/Src/space_vector_pwm.cpp:196:6:void SpaceVectorPWM::writePWM()	1
