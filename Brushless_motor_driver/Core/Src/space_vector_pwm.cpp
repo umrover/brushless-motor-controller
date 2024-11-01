@@ -6,7 +6,7 @@
  */
 #include "space_vector_pwm.h"
 
-
+#include <cmath>
 
 SpaceVectorPWM::SpaceVectorPWM(float maxModulationIndex, TimerChannel_t PhaseA, TimerChannel_t PhaseB, TimerChannel_t PhaseC ){
 	this->maxModulationIndex = maxModulationIndex;
@@ -32,10 +32,47 @@ void SpaceVectorPWM::getDutyCycles(float& dutyCycleA, float& dutyCycleB, float& 
 
 }
 
+uint8_t SpaceVectorPWM::calculate_sector() {
+    // Calculate V_ref1, V_ref2, and V_ref3 using the given equations
+	// sector number outputs
+	// (0-60]		- 3
+	// (60-120]		- 1
+	// (120-180]	- 5
+	// (180-240]	- 4
+	// (240, 320]	- 6
+	// (320, 0]		- 2
+
+	float U_alpha = this->alphaVoltage;
+	float U_beta = this->betaVoltage;
+
+    double V_ref1 = U_beta;
+    double V_ref2 = (-U_beta + U_alpha * sqrt(3)) / 2;
+    double V_ref3 = (-U_beta - U_alpha * sqrt(3)) / 2;
+
+    // Determine the values of a, b, and c based on the conditions
+    int a = (V_ref1 > 0) ? 1 : 0;
+    int b = (V_ref2 > 0) ? 1 : 0;
+    int c = (V_ref3 > 0) ? 1 : 0;
+
+    // Calculate the sector number
+    int sector = 4 * c + 2 * b + a;
+
+    return sector;
+}
+
 void SpaceVectorPWM::calculateDutyCycles(){
 	// function that calculates duty-cycles on each phase given the alpha and beta values
 	// The space of all p0ssible vectors can be divided into 6 sectors: 0,1,2,3,4,5.
 	// The boundaries of each of these sectors are the basic vectors
+
+	// Steps to calculate duty cycle as per https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/171/svgen_5F00_dq.pdf
+	//  - Determination of the sector
+	//	- Calculation of X, Y and Z
+	//	- Calculation of t1 and t2
+	//	- Determination of the duty cycle taon, tbon and tcon
+	//	- Assignment of the duty cycles to Ta, Tb and Tc
+
+
 
 
 }

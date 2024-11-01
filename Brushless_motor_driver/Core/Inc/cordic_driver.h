@@ -25,7 +25,7 @@ public:
     };
 
     // Constructor that accepts an operation type and scaling mode (if required)
-    STM32CORDIC(Operation operation, uint32_t precision = 6);
+    STM32CORDIC();
 
     // Destructor
     ~STM32CORDIC();

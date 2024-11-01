@@ -33,8 +33,12 @@ public:
     void update();
 
 private:
+    // Internal helper to calculate sector number
+    uint8_t calculate_sector();
+
     // Internal helper function for SVPWM calculations
     void calculateDutyCycles();
+
     // writes the PWM duty cycles stored in the object
     void writePWM();
 
