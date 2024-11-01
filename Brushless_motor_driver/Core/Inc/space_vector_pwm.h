@@ -14,7 +14,6 @@
 typedef struct {
     TIM_HandleTypeDef *htim;
     uint32_t channel;
-
     TIM_TypeDef * TIM_obj;
     uint32_t CCR_addr;
 
@@ -39,12 +38,13 @@ private:
     uint8_t calculate_sector();
 
     // helper function to calculate current X,Y,Z values and store them in the member variables
-    void calculate_XYZ(double U_alpha, double U_beta);
+    void calculate_XYZ();
 
     // Helper function to calculate t1 and t2 values
-    std::pair<double, double> calculate_vector_ontime(uint8_t sector);
+    std::pair<double, double> calculate_vector_ontime(uint8_t sector, double PWM_Period);
 
     // Helper function to calculate on time for each phase
+    void calculate_relative_time_on();
 
     // Internal helper function for SVPWM calculations
     void calculateDutyCycles();
@@ -62,11 +62,13 @@ private:
     double dutyCycleB;
     double dutyCycleC;
 
-
     double X;
     double Y;
     double Z;
 
+    double taon;
+    double tbon;
+    double tcon;
 
     TimerChannel_t PhaseA_iface;
     TimerChannel_t PhaseB_iface;

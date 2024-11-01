@@ -6,6 +6,7 @@
  */
 #include "space_vector_pwm.h"
 #include <cmath>
+//#include <cassert>
 
 #define SQRT_3 1.7320508075688772
 
@@ -61,7 +62,9 @@ uint8_t SpaceVectorPWM::calculate_sector() {
     return sector;
 }
 
-void SpaceVectorPWM::calculate_XYZ(double U_alpha, double U_beta){
+void SpaceVectorPWM::calculate_XYZ(){
+	double U_alpha = this->alphaVoltage;
+	double U_beta = this->betaVoltage;
 	double X  = U_beta;
 	double Y = (SQRT_3 * U_alpha + U_beta) / 2;
 	double Z = (-SQRT_3 * U_alpha + U_beta) / 2;
@@ -96,6 +99,31 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 }
 
 
+void SpaceVectorPWM::calculate_relative_time_on(uint8_t sector, double PWM_Period){
+
+	uint32_t prescaler_A = PhaseA_iface.TIM_obj->PSC;
+	uint32_t prescaler_B = PhaseB_iface.TIM_obj->PSC;
+	uint32_t prescaler_C = PhaseC_iface.TIM_obj->PSC;
+
+	double Peripheral_frequency  = 64000000.0; // clock frequency on the peripheral bus
+
+	uint32_t ARR_A = PhaseA_iface.TIM_obj->ARR;
+	uint32_t ARR_B = PhaseB_iface.TIM_obj->ARR;
+	uint32_t ARR_C = PhaseC_iface.TIM_obj->ARR;
+
+
+	std::pair<double, double> t1_t2_pair = calculate_vector_ontime(sector);
+	double t1 = t1_t2_pair.first;
+	double t2 = t1_t2_pair.second;
+
+	this->taon = (PWM_Period_A - t1 - t2)/2;
+	this->tbon = (this->taon + t1);
+	this->tcon = (this->tbon + t2);
+
+}
+
+
+
 
 void SpaceVectorPWM::calculateDutyCycles(){
 	// function that calculates duty-cycles on each phase given the alpha and beta values
@@ -109,8 +137,57 @@ void SpaceVectorPWM::calculateDutyCycles(){
 	//	- Determination of the duty cycle taon, tbon and tcon
 	//	- Assignment of the duty cycles to Ta, Tb and Tc
 
+	double PWM_Period_A = ((ARR_A+1)*(prescaler_A+1))/(Peripheral_frequency);
+	//	double PWM_Period_B = ((ARR_B+1)*(prescaler_B+1))/(Peripheral_frequency);
+	//	double PWM_Period_C = ((ARR_C+1)*(prescaler_C+1))/(Peripheral_frequency);
+	// PWM period SHOULD be the same across phases
+
+	uint8_t sector = calculate_sector(); //function assumes voltageAlpha and voltageBeta have been set
+	calculate_XYZ();
+	calculate_relative_time_on(sector, PWM_Period_A);
 
 
+	// Assign the dutycycle to a given phase line
+	// sector number outputs
+	// (0-60]		- 3
+	// (60-120]		- 1
+	// (120-180]	- 5
+	// (180-240]	- 4
+	// (240, 320]	- 6
+	// (320, 0]		- 2
+	double time_period_A;
+	double time_period_B;
+	double time_period_C;
+	switch (sector){
+	case 1:
+		time_period_A = this->tbon;
+		time_period_B = this->taon;
+		time_period_C = this->tcon;
+
+	case 2:
+		time_period_A = this->taon;
+		time_period_B = this->tcon;
+		time_period_C = this->tbon;
+
+	case 3:
+		time_period_A = this->taon;
+		time_period_B = this->tbon;
+		time_period_C = this->tcon;
+
+	case 4:
+		time_period_A = this->tcon;
+		time_period_B = this->tbon;
+		time_period_C = this->taon;
+
+	case 5:
+		time_period_A = this->tcon;
+		time_period_B = this->taon;
+		time_period_C = this->tbon;
+	}
+
+	this->dutyCycleA = (time_period_A/PWM_Period_A)*100;
+	this->dutyCycleB = (time_period_B/PWM_Period_A)*100;
+	this->dutyCycleC = (time_period_C/PWM_Period_A)*100;
 
 }
 
