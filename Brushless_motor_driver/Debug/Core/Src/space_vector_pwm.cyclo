@@ -6,4 +6,5 @@
 ../Core/Src/space_vector_pwm.cpp:78:27:std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t)	6
 ../Core/Src/space_vector_pwm.cpp:106:6:void SpaceVectorPWM::calculate_relative_time_on(uint8_t, double)	1
 ../Core/Src/space_vector_pwm.cpp:121:6:void SpaceVectorPWM::calculateDutyCycles()	6
-../Core/Src/space_vector_pwm.cpp:196:6:void SpaceVectorPWM::writePWM()	1
+../Core/Src/space_vector_pwm.cpp:189:6:void SpaceVectorPWM::writePWM()	1
+../Core/Src/space_vector_pwm.cpp:210:6:void SpaceVectorPWM::update()	1

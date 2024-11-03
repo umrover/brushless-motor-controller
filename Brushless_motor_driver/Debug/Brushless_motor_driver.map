@@ -2870,7 +2870,7 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./Core/Src/space_vector_pwm.o
  .bss           0x0000000000000000        0x0 ./Core/Src/space_vector_pwm.o
  .text._ZN14SpaceVectorPWMC2Ed14TimerChannel_tS0_S0_
-                0x0000000000000000       0xa8 ./Core/Src/space_vector_pwm.o
+                0x0000000000000000       0xc0 ./Core/Src/space_vector_pwm.o
  .text._ZN14SpaceVectorPWM16setInputVoltagesEdd
                 0x0000000000000000       0x30 ./Core/Src/space_vector_pwm.o
  .text._ZNK14SpaceVectorPWM13getDutyCyclesERdS0_S0_
@@ -2887,13 +2887,15 @@ Discarded input sections
                 0x0000000000000000      0x198 ./Core/Src/space_vector_pwm.o
  .text._ZN14SpaceVectorPWM8writePWMEv
                 0x0000000000000000       0xc0 ./Core/Src/space_vector_pwm.o
- .debug_info    0x0000000000000000     0x1178 ./Core/Src/space_vector_pwm.o
- .debug_abbrev  0x0000000000000000      0x441 ./Core/Src/space_vector_pwm.o
+ .text._ZN14SpaceVectorPWM6updateEv
+                0x0000000000000000       0x70 ./Core/Src/space_vector_pwm.o
+ .debug_info    0x0000000000000000     0x11d4 ./Core/Src/space_vector_pwm.o
+ .debug_abbrev  0x0000000000000000      0x42a ./Core/Src/space_vector_pwm.o
  .debug_aranges
-                0x0000000000000000       0x60 ./Core/Src/space_vector_pwm.o
+                0x0000000000000000       0x68 ./Core/Src/space_vector_pwm.o
  .debug_rnglists
-                0x0000000000000000       0x4a ./Core/Src/space_vector_pwm.o
- .debug_macro   0x0000000000000000      0x4fd ./Core/Src/space_vector_pwm.o
+                0x0000000000000000       0x50 ./Core/Src/space_vector_pwm.o
+ .debug_macro   0x0000000000000000      0x503 ./Core/Src/space_vector_pwm.o
  .debug_macro   0x0000000000000000      0xc52 ./Core/Src/space_vector_pwm.o
  .debug_macro   0x0000000000000000      0x16d ./Core/Src/space_vector_pwm.o
  .debug_macro   0x0000000000000000       0x2e ./Core/Src/space_vector_pwm.o
@@ -2988,10 +2990,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x17 ./Core/Src/space_vector_pwm.o
  .debug_macro   0x0000000000000000       0x17 ./Core/Src/space_vector_pwm.o
  .debug_macro   0x0000000000000000       0x17 ./Core/Src/space_vector_pwm.o
- .debug_line    0x0000000000000000     0x1809 ./Core/Src/space_vector_pwm.o
- .debug_str     0x0000000000000000    0xf1090 ./Core/Src/space_vector_pwm.o
+ .debug_line    0x0000000000000000     0x183f ./Core/Src/space_vector_pwm.o
+ .debug_str     0x0000000000000000    0xf10d4 ./Core/Src/space_vector_pwm.o
  .comment       0x0000000000000000       0x44 ./Core/Src/space_vector_pwm.o
- .debug_frame   0x0000000000000000      0x188 ./Core/Src/space_vector_pwm.o
+ .debug_frame   0x0000000000000000      0x1b0 ./Core/Src/space_vector_pwm.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Core/Src/space_vector_pwm.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32g4xx_hal_msp.o

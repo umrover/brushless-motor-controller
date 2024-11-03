@@ -9,7 +9,7 @@
 //#include <cassert>
 
 #define SQRT_3 1.7320508075688772
-
+#define APB_CLOCK_FREQ 64000000.0 // Hz
 
 
 SpaceVectorPWM::SpaceVectorPWM(double maxModulationIndex, TimerChannel_t PhaseA, TimerChannel_t PhaseB, TimerChannel_t PhaseC ){
@@ -123,13 +123,6 @@ void SpaceVectorPWM::calculateDutyCycles(){
 	// The space of all p0ssible vectors can be divided into 6 sectors: 0,1,2,3,4,5.
 	// The boundaries of each of these sectors are the basic vectors
 
-	// Steps to calculate duty cycle as per https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/171/svgen_5F00_dq.pdf
-	//  - Determination of the sector
-	//	- Calculation of X, Y and Z
-	//	- Calculation of t1 and t2
-	//	- Determination of the duty cycle taon, tbon and tcon
-	//	- Assignment of the duty cycles to Ta, Tb and Tc
-
 
 	uint32_t prescaler_A = PhaseA_iface.TIM_obj->PSC;
 //	uint32_t prescaler_B = PhaseB_iface.TIM_obj->PSC;
@@ -213,3 +206,17 @@ void SpaceVectorPWM::writePWM(){
 
 
 }
+
+void SpaceVectorPWM::update(){
+
+	// Steps to calculate duty cycle as per https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/171/svgen_5F00_dq.pdf
+	//  - Determination of the sector
+	//	- Calculation of X, Y and Z
+	//	- Calculation of t1 and t2
+	//	- Determination of the duty cycle taon, tbon and tcon
+	//	- Assignment of the duty cycles to Ta, Tb and Tc
+	calculateDutyCycles();
+	writePWM();
+}
+
+

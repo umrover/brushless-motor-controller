@@ -16,7 +16,8 @@ typedef struct {
     uint32_t channel;
     TIM_TypeDef * TIM_obj;
     uint32_t* CCR_addr; // eg TIM3->CCR1
-
+    uint32_t* ARR_addr;
+    uint32_t* PSC_addr;
 } TimerChannel_t;
 
 class SpaceVectorPWM {
@@ -30,6 +31,7 @@ public:
     // Get the calculated duty cycles for each phase
     void getDutyCycles(double& dutyCycleA, double& dutyCycleB, double& dutyCycleC) const;
 
+    // Runs one iteration of the SVPWM algorithm
     void update();
 
 private:
@@ -75,6 +77,7 @@ private:
     TimerChannel_t PhaseA_iface;
     TimerChannel_t PhaseB_iface;
     TimerChannel_t PhaseC_iface;
+
 
 };
 
