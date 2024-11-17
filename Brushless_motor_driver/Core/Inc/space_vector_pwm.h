@@ -15,9 +15,9 @@ typedef struct {
     TIM_HandleTypeDef *htim;
     uint32_t channel;
     TIM_TypeDef * TIM_obj;
-    uint32_t* CCR_addr; // eg TIM3->CCR1
-    uint32_t* ARR_addr;
-    uint32_t* PSC_addr;
+    volatile uint32_t* CCR_addr; // eg TIM3->CCR1
+    volatile uint32_t* ARR_addr;
+    volatile uint32_t* PSC_addr;
 } TimerChannel_t;
 
 class SpaceVectorPWM {
