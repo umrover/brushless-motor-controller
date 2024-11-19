@@ -24,11 +24,12 @@ extern TIM_HandleTypeDef htim20;
 
 
 std::unique_ptr<HallEncoderDriver> hall_driver;
+std::unique_ptr<SpaceVectorPWM> SVPWM_obj;
 
 double voltage_a = 0.0;
 double voltage_b = 0.0;
 double theta = 0;
-double radius = 5.0;
+double radius = 10.0;
 
 void setup() {
 
@@ -40,9 +41,9 @@ void setup() {
 //	HAL_TIM_Base_Start_IT(&htim8);
 //	HAL_TIM_Base_Start_IT(&htim20);
 
-	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
-	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_2);
-	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
+//	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
+//	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_2);
+//	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
 
 	// Enable the gate driver
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET);
@@ -50,6 +51,17 @@ void setup() {
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_SET);
 
 	HAL_Delay(10);
+
+	TimerChannel_t Phase_A_timer{&htim8, TIM_CHANNEL_4, TIM8, &TIM8->CCR4, &TIM8->ARR, &TIM8->PSC};
+	TimerChannel_t Phase_B_timer{&htim8, TIM_CHANNEL_1, TIM8, &TIM8->CCR1, &TIM8->ARR, &TIM8->PSC};
+	TimerChannel_t Phase_C_timer{&htim20, TIM_CHANNEL_4, TIM20, &TIM20->CCR4, &TIM20->ARR, &TIM20->PSC};
+
+	SVPWM_obj = std::make_unique<SpaceVectorPWM>(100.0, Phase_A_timer, Phase_B_timer, Phase_C_timer);
+
+
+//	HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);
+//	HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
+//	HAL_TIM_PWM_Start(&htim20, TIM_CHANNEL_4);
 
 }
 
@@ -63,18 +75,20 @@ void loop() {
 // 	CurrSensDriver::get_current_Amp(PhaseCurrents);
 
 
-	TimerChannel_t Phase_A_timer{&htim8, 4, TIM8, &TIM8->CCR4, &TIM8->ARR, &TIM8->PSC};
-	TimerChannel_t Phase_B_timer{&htim8, 1, TIM8, &TIM8->CCR1, &TIM8->ARR, &TIM8->PSC};
-	TimerChannel_t Phase_C_timer{&htim20, 4, TIM20, &TIM20->CCR4, &TIM20->ARR, &TIM20->PSC};
-	
-	SpaceVectorPWM SVPWM_obj (100.0, Phase_A_timer, Phase_B_timer, Phase_C_timer);
 
 	while (theta <= 6.2831){
 		voltage_b = radius * sin(theta);
 		voltage_a = radius * cos(theta);
-		SVPWM_obj.setInputVoltages(voltage_a, voltage_b);
+		SVPWM_obj->setInputVoltages(voltage_a, voltage_b);
+		SVPWM_obj->update();
 		theta += 0.0174533;
 	}
+
+
+//	TIM8->CCR4 = 55706;
+//	TIM8->CCR1 = 55706;
+//	TIM20->CCR4 = 55706;
+
 
 
 	HAL_Delay(1000);

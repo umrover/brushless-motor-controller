@@ -82,22 +82,27 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 	case 1:
 		result.first = this->Z;
 		result.second = this->Y;
+		break;
 
 	case 2:
 		result.first = this->Y;
 		result.second = -1*this->X;
+		break;
 
 	case 3:
 		result.first = -1*this->Z;
 		result.second = this->X;
+		break;
 
 	case 4:
 		result.first = -1*this->X;
 		result.second = this->Z;
+		break;
 
 	case 5:
 		result.first = this->X;
 		result.second = this->Y;
+		break;
 
 	}
 }
@@ -157,26 +162,31 @@ void SpaceVectorPWM::calculateDutyCycles(){
 		time_period_A = this->tbon;
 		time_period_B = this->taon;
 		time_period_C = this->tcon;
+		break;
 
 	case 2:
 		time_period_A = this->taon;
 		time_period_B = this->tcon;
 		time_period_C = this->tbon;
+		break;
 
 	case 3:
 		time_period_A = this->taon;
 		time_period_B = this->tbon;
 		time_period_C = this->tcon;
+		break;
 
 	case 4:
 		time_period_A = this->tcon;
 		time_period_B = this->tbon;
 		time_period_C = this->taon;
+		break;
 
 	case 5:
 		time_period_A = this->tcon;
 		time_period_B = this->taon;
 		time_period_C = this->tbon;
+		break;
 	}
 
 	this->dutyCycleA = (time_period_A/PWM_Period_A)*100;
