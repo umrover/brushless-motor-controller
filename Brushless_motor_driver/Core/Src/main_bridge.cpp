@@ -29,7 +29,7 @@ std::unique_ptr<SpaceVectorPWM> SVPWM_obj;
 double voltage_a = 0.0;
 double voltage_b = 0.0;
 double theta = 0;
-double radius = 10.0;
+double radius = 1.154701;
 
 void setup() {
 
@@ -75,15 +75,12 @@ void loop() {
 // 	CurrSensDriver::get_current_Amp(PhaseCurrents);
 
 
-
-	while (theta <= 6.2831){
-		voltage_b = radius * sin(theta);
-		voltage_a = radius * cos(theta);
-		SVPWM_obj->setInputVoltages(voltage_a, voltage_b);
-		SVPWM_obj->update();
-		theta += 0.0174533;
-	}
-
+	voltage_b = radius * sin(theta);
+	voltage_a = radius * cos(theta);
+	SVPWM_obj->setInputVoltages(voltage_a, voltage_b);
+	SVPWM_obj->update();
+	theta += 0.0020943951;
+	theta = std::fmod(theta, 6.28318530718);
 
 //	TIM8->CCR4 = 55706;
 //	TIM8->CCR1 = 55706;
@@ -91,6 +88,6 @@ void loop() {
 
 
 
-	HAL_Delay(1000);
+	HAL_Delay(10);
 }
 

@@ -6,6 +6,7 @@
  */
 #include "space_vector_pwm.h"
 #include <cmath>
+#include <algorithm>
 //#include <cassert>
 
 #define SQRT_3 1.7320508075688772
@@ -114,9 +115,9 @@ void SpaceVectorPWM::calculate_relative_time_on(uint8_t sector, double PWM_Perio
 	double t1 = t1_t2_pair.first;
 	double t2 = t1_t2_pair.second;
 
-	this->taon = (PWM_Period - t1 - t2)/2;
-	this->tbon = (this->taon + t1);
-	this->tcon = (this->tbon + t2);
+	this->taon = (PWM_Period - t1*PWM_Period - t2*PWM_Period)/2;
+	this->tbon = (this->taon + t1*PWM_Period);
+	this->tcon = (this->tbon + t2*PWM_Period);
 
 }
 
@@ -189,9 +190,9 @@ void SpaceVectorPWM::calculateDutyCycles(){
 		break;
 	}
 
-	this->dutyCycleA = (time_period_A/PWM_Period_A)*100;
-	this->dutyCycleB = (time_period_B/PWM_Period_A)*100;
-	this->dutyCycleC = (time_period_C/PWM_Period_A)*100;
+	this->dutyCycleA = std::clamp ((time_period_A/PWM_Period_A)*100, 0.0, 100.0);
+	this->dutyCycleB = std::clamp ((time_period_B/PWM_Period_A)*100, 0.0, 100.0);
+	this->dutyCycleC = std::clamp ((time_period_C/PWM_Period_A)*100, 0.0, 100.0);
 
 }
 
