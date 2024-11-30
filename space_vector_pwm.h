@@ -78,6 +78,9 @@ private:
 
     uint8_t sector;
 
+    double t1;
+    double t2;
+
 };
 
 #endif // SPACE_VECTOR_PWM_H

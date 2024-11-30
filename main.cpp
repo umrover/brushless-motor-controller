@@ -12,7 +12,7 @@
 
 double voltage_a = 0.0;
 double voltage_b = 0.0;
-double theta = 0;
+double theta = 0.001;
 double radius = 1.154701;
 
 uint32_t TIM_CHANNEL_4 = 0;

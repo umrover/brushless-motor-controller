@@ -60,8 +60,6 @@ uint8_t SpaceVectorPWM::calculate_sector() {
     double V_ref3 = (-U_beta - U_alpha * SQRT_3) / 2;
 
 
-	std::cout << "VREFs " << V_ref1 << " " << V_ref2 << " " << V_ref3 << std::endl;
-
     // Determine the values of a, b, and c based on the conditions
     int a = (V_ref1 > 0) ? 1 : 0;
     int b = (V_ref2 > 0) ? 1 : 0;
@@ -116,7 +114,7 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 
 	case 5:
 		result.first = this->X;
-		result.second = this->Y;
+		result.second = -1 * this->Y;
 		break;
 	
 	case 6:
@@ -125,7 +123,7 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 		break;
 
 	}
-
+	
 	return result;
 }
 
@@ -135,6 +133,9 @@ void SpaceVectorPWM::calculate_relative_time_on(uint8_t sector, double PWM_Perio
 	std::pair<double, double> t1_t2_pair = calculate_vector_ontime(sector);
 	double t1 = t1_t2_pair.first;
 	double t2 = t1_t2_pair.second;
+
+	this->t1 = t1;
+	this->t2 = t2;
 
 	this->taon = (PWM_Period - t1*PWM_Period - t2*PWM_Period)/2;
 	this->tbon = (this->taon + t1*PWM_Period);
@@ -205,9 +206,9 @@ void SpaceVectorPWM::calculateDutyCycles(){
 		break;
 
 	case 5:
-		time_period_A = this->tbon;
+		time_period_A = this->tcon;
 		time_period_B = this->taon;
-		time_period_C = this->tcon;
+		time_period_C = this->tbon;
 		break;
 
 	case 6:
@@ -234,7 +235,7 @@ void SpaceVectorPWM::writePWM(){
 	uint32_t ARR_phase_C = 65535;
 
 
-	std::cout << unsigned(this->sector) << " " << this->alphaVoltage << " " << this->betaVoltage << " " << this->dutyCycleA << " " << this->dutyCycleB << " " << this->dutyCycleC<< std::endl;
+	std::cout << unsigned(this->sector) << " " << this->alphaVoltage << " " << this->betaVoltage << " " << this->dutyCycleA << " " << this->dutyCycleB << " " << this->dutyCycleC << " " << this->t1 << " " << this->t2 << " " << this->X << " " << this->Y << " " << this->Z << std::endl;
 	//this->X << " " << this->Y << " " << this->Z << " " 
 	uint32_t CCR_to_set_Phase_A = (uint32_t) (this->dutyCycleA * ARR_phase_A);
 	uint32_t CCR_to_set_Phase_B = (uint32_t) (this->dutyCycleB * ARR_phase_B);
