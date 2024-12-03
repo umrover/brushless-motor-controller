@@ -78,6 +78,14 @@ void SpaceVectorPWM::calculate_XYZ(){
 
 std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector){
 
+// sector number outputs
+	// (0-60]		- 3
+	// (60-120]		- 1
+	// (120-180]	- 5
+	// (180-240]	- 4
+	// (240, 320]	- 6
+	// (320, 0]		- 2
+
 	std::pair<double, double> result;
 	switch (sector){
 	case 1:
@@ -91,7 +99,7 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 		break;
 
 	case 3:
-		result.first = -1*this->Z;
+		result.first = -1 * this->Z;
 		result.second = this->X;
 		break;
 
@@ -102,10 +110,17 @@ std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t sector
 
 	case 5:
 		result.first = this->X;
-		result.second = this->Y;
+		result.second = -1 * this->Y;
+		break;
+	
+	case 6:
+		result.first = -1 * this->Y;
+		result.second = -1 * this->Z;
 		break;
 
 	}
+	
+	return result;
 }
 
 
@@ -188,11 +203,23 @@ void SpaceVectorPWM::calculateDutyCycles(){
 		time_period_B = this->taon;
 		time_period_C = this->tbon;
 		break;
+
+	case 6:
+		time_period_A = this->tbon;
+		time_period_B = this->tcon;
+		time_period_C = this->taon;
+		break;
 	}
 
 	this->dutyCycleA = std::clamp ((time_period_A/PWM_Period_A)*100, 0.0, 100.0);
 	this->dutyCycleB = std::clamp ((time_period_B/PWM_Period_A)*100, 0.0, 100.0);
 	this->dutyCycleC = std::clamp ((time_period_C/PWM_Period_A)*100, 0.0, 100.0);
+
+	// TODO: figure out how to apply the calculated PWM, it will go above 100% 
+
+	// this->dutyCycleA = (time_period_A/PWM_Period_A);
+	// this->dutyCycleB = (time_period_B/PWM_Period_A);
+	// this->dutyCycleC = (time_period_C/PWM_Period_A);
 
 }
 
