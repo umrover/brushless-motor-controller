@@ -211,9 +211,9 @@ void SpaceVectorPWM::calculateDutyCycles(){
 		break;
 	}
 
-	this->dutyCycleA = std::clamp ((time_period_A/PWM_Period_A)*100, 0.0, 100.0);
-	this->dutyCycleB = std::clamp ((time_period_B/PWM_Period_A)*100, 0.0, 100.0);
-	this->dutyCycleC = std::clamp ((time_period_C/PWM_Period_A)*100, 0.0, 100.0);
+	this->dutyCycleA = (((time_period_A/PWM_Period_A) + 0.07735)/1.1547)*100;
+	this->dutyCycleB = (((time_period_B/PWM_Period_A) + 0.07735)/1.1547)*100;
+	this->dutyCycleC = (((time_period_C/PWM_Period_A) + 0.07735)/1.1547)*100;
 
 	// TODO: figure out how to apply the calculated PWM, it will go above 100% 
 
