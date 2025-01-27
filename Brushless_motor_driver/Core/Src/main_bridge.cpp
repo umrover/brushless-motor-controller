@@ -79,7 +79,7 @@ void loop() {
 	voltage_a = radius * cos(theta);
 	SVPWM_obj->setInputVoltages(voltage_a, voltage_b);
 	SVPWM_obj->update();
-	theta += 0.0020943951;
+	theta += 0.006283185;
 	theta = std::fmod(theta, 6.28318530718);
 
 //	TIM8->CCR4 = 55706;
@@ -88,6 +88,6 @@ void loop() {
 
 
 
-	HAL_Delay(10);
+	HAL_Delay(1);
 }
 

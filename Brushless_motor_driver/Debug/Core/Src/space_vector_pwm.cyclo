@@ -1,10 +1,11 @@
-../Core/Src/space_vector_pwm.cpp:15:1:SpaceVectorPWM::SpaceVectorPWM(double, TimerChannel_t, TimerChannel_t, TimerChannel_t)	1
-../Core/Src/space_vector_pwm.cpp:28:6:void SpaceVectorPWM::setInputVoltages(double, double)	1
-../Core/Src/space_vector_pwm.cpp:34:6:void SpaceVectorPWM::getDutyCycles(double&, double&, double&) const	1
-../Core/Src/space_vector_pwm.cpp:41:9:uint8_t SpaceVectorPWM::calculate_sector()	4
-../Core/Src/space_vector_pwm.cpp:69:6:void SpaceVectorPWM::calculate_XYZ()	1
-../Core/Src/space_vector_pwm.cpp:78:27:std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t)	6
-../Core/Src/space_vector_pwm.cpp:106:6:void SpaceVectorPWM::calculate_relative_time_on(uint8_t, double)	1
-../Core/Src/space_vector_pwm.cpp:121:6:void SpaceVectorPWM::calculateDutyCycles()	6
-../Core/Src/space_vector_pwm.cpp:189:6:void SpaceVectorPWM::writePWM()	1
-../Core/Src/space_vector_pwm.cpp:210:6:void SpaceVectorPWM::update()	1
+/opt/st/stm32cubeide_1.14.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.linux64_1.1.100.202309141235/tools/arm-none-eabi/include/c++/11.3.1/arm-none-eabi/thumb/v7e-m+fp/hard/bits/gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
+../Core/Src/space_vector_pwm.cpp:16:1:SpaceVectorPWM::SpaceVectorPWM(double, TimerChannel_t, TimerChannel_t, TimerChannel_t)	1
+../Core/Src/space_vector_pwm.cpp:29:6:void SpaceVectorPWM::setInputVoltages(double, double)	1
+../Core/Src/space_vector_pwm.cpp:35:6:void SpaceVectorPWM::getDutyCycles(double&, double&, double&) const	1
+../Core/Src/space_vector_pwm.cpp:42:9:uint8_t SpaceVectorPWM::calculate_sector()	4
+../Core/Src/space_vector_pwm.cpp:70:6:void SpaceVectorPWM::calculate_XYZ()	1
+../Core/Src/space_vector_pwm.cpp:79:27:std::pair<double, double> SpaceVectorPWM::calculate_vector_ontime(uint8_t)	7
+../Core/Src/space_vector_pwm.cpp:127:6:void SpaceVectorPWM::calculate_relative_time_on(uint8_t, double)	1
+../Core/Src/space_vector_pwm.cpp:142:6:void SpaceVectorPWM::calculateDutyCycles()	7
+../Core/Src/space_vector_pwm.cpp:227:6:void SpaceVectorPWM::writePWM()	1
+../Core/Src/space_vector_pwm.cpp:248:6:void SpaceVectorPWM::update()	1

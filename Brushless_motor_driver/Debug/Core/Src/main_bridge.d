@@ -34,7 +34,8 @@ Core/Src/main_bridge.o: ../Core/Src/main_bridge.cpp \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- ../Core/Inc/filter.h ../Core/Inc/hall_encoder.h ../Core/Inc/data_types.h
+ ../Core/Inc/filter.h ../Core/Inc/hall_encoder.h ../Core/Inc/data_types.h \
+ ../Core/Inc/space_vector_pwm.h
 ../Core/Inc/main_bridge.h:
 ../Core/Inc/curr_sens.h:
 ../Core/Inc/filter.h:
@@ -75,3 +76,4 @@ Core/Src/main_bridge.o: ../Core/Src/main_bridge.cpp \
 ../Core/Inc/filter.h:
 ../Core/Inc/hall_encoder.h:
 ../Core/Inc/data_types.h:
+../Core/Inc/space_vector_pwm.h:
